@@ -1,4 +1,4 @@
-package io.transmogrifier;
+package io.transmogrifier.common;
 
 import java.util.Objects;
 
@@ -7,9 +7,10 @@ public final class Pair<F, S>
     private final F first;
     private final S second;
 
-    public Pair(final F f, final S s)
+    public Pair(final F f,
+                final S s)
     {
-        first  = f;
+        first = f;
         second = s;
     }
 
@@ -33,25 +34,29 @@ public final class Pair<F, S>
             return true;
         }
 
-        if (obj == null || getClass() != obj.getClass())
+        if(obj == null || getClass() != obj.getClass())
         {
             return false;
         }
 
-        pair = (Pair<?, ?>) obj;
+        pair = (Pair<?, ?>)obj;
 
-        return Objects.equals(first, pair.first) &&
-               Objects.equals(second, pair.second);
+        return Objects.equals(first,
+                              pair.first) && Objects.equals(second,
+                                                            pair.second);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(first, second);
+        return Objects.hash(first,
+                            second);
     }
 
     public String toString()
     {
-        return String.format("(%s, %s)", first, second);
+        return String.format("(%s, %s)",
+                             first,
+                             second);
     }
 }

@@ -1,21 +1,23 @@
-package io.transmogrifier;
+package io.transmogrifier.common;
 
 
 public abstract class AbstractManifestDownloader<T>
-    implements ManifestDownloader<T>
+        implements ManifestDownloader<T>
 {
     public Manifest downloadManifest(final T id)
-        throws ManifestDownloadException
+            throws
+            ManifestDownloadException
     {
         final String   json;
         final Manifest manifest;
 
-        json     = downloadJSON(id);
+        json = downloadJSON(id);
         manifest = Manifest.parse(json);
 
-        return  manifest;
+        return manifest;
     }
 
     public abstract String downloadJSON(T id)
-        throws ManifestDownloadException;
+            throws
+            ManifestDownloadException;
 }

@@ -1,9 +1,8 @@
-package io.transmogrifier;
+package io.transmogrifier.common;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,8 +18,8 @@ public final class FileUtils
 
     public static void copyFile(final File inputFile,
                                 final File destinationFile)
-        throws FileNotFoundException,
-               IOException
+            throws
+            IOException
     {
         try(final InputStream inputStream = new FileInputStream(inputFile))
         {
@@ -31,12 +30,13 @@ public final class FileUtils
 
     public static void copyFile(final InputStream inputStream,
                                 final File destinationFile)
-        throws IOException
+            throws
+            IOException
     {
         try(final OutputStream outputStream = new FileOutputStream(destinationFile))
         {
             final byte[] buffer;
-            int length;
+            int          length;
 
             buffer = new byte[1024];
 
@@ -50,7 +50,8 @@ public final class FileUtils
     }
 
     public static String readTextFile(final File inputFile)
-        throws IOException
+            throws
+            IOException
     {
         final String retVal;
 
@@ -58,9 +59,7 @@ public final class FileUtils
 
         builder = new StringBuilder();
 
-        try(final BufferedReader reader = new BufferedReader(
-                new InputStreamReader(
-                        new FileInputStream(inputFile))))
+        try(final BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile))))
         {
             String line;
 
@@ -78,7 +77,8 @@ public final class FileUtils
 
     public static void writeTextFile(final String text,
                                      final File outputFile)
-        throws IOException
+            throws
+            IOException
     {
         try(final FileWriter writer = new FileWriter(outputFile))
         {
@@ -87,7 +87,8 @@ public final class FileUtils
     }
 
     public static void deleteFolder(final File folder)
-        throws IOException
+            throws
+            IOException
     {
         if(folder.exists())
         {
@@ -104,10 +105,11 @@ public final class FileUtils
     }
 
     private static void deleteFolderRecursively(final File folder)
-        throws IOException
+            throws
+            IOException
     {
         final File[] entries;
-        boolean deleted;
+        boolean      deleted;
 
         entries = folder.listFiles();
 
@@ -146,8 +148,8 @@ public final class FileUtils
     }
 
     public static void createFolder(final File folder)
-        throws
-        IOException
+            throws
+            IOException
     {
         if(!(folder.exists()))
         {

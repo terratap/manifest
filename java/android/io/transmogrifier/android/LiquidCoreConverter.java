@@ -1,13 +1,12 @@
 package io.transmogrifier.android;
 
+import io.transmogrifier.common.Converter;
 import org.liquidplayer.javascript.JSContext;
 import org.liquidplayer.javascript.JSValue;
 
-import io.transmogrifier.Converter;
-
 
 public class LiquidCoreConverter
-    implements Converter
+        implements Converter
 {
     @Override
     public String convert(final String converterJS,

@@ -1,28 +1,33 @@
 package io.transmogrifier.jse;
 
-import java.io.*;
+import io.transmogrifier.common.AbstractDatasetDownloader;
+import io.transmogrifier.common.Manifest.Dataset;
 
-import io.transmogrifier.AbstractDatasetDownloader;
-import io.transmogrifier.Manifest;
+import java.io.File;
+import java.io.IOException;
 
 public class SerialDatasetDownloader
-    extends AbstractDatasetDownloader<String>
+        extends AbstractDatasetDownloader<String>
 {
     @Override
-    public void download(final String                 id,
-                         final Manifest.Dataset       dataset,
+    public void download(final String id,
+                         final Dataset dataset,
                          final DatasetDownloadHandler handler)
     {
         try
         {
             final File[][] files;
 
-            files = download(dataset, handler);
-            handler.datasetDownloadSuccess(dataset, files[0][0], files[1]);
+            files = download(dataset,
+                             handler);
+            handler.datasetDownloadSuccess(dataset,
+                                           files[0][0],
+                                           files[1]);
         }
         catch(final IOException ex)
         {
-            handler.datasetDownloadFailed(dataset, ex);
+            handler.datasetDownloadFailed(dataset,
+                                          ex);
         }
     }
 }

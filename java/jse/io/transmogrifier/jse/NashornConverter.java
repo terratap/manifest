@@ -1,7 +1,9 @@
 package io.transmogrifier.jse;
 
 
-import io.transmogrifier.Converter;
+import io.transmogrifier.common.ConversionException;
+import io.transmogrifier.common.Converter;
+import jdk.nashorn.api.scripting.NashornException;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -10,11 +12,13 @@ import javax.script.ScriptException;
 
 
 public class NashornConverter
-    implements Converter
+        implements Converter
 {
     @Override
     public String convert(final String converterJS,
                           final String data)
+            throws
+            ConversionException
     {
         final ScriptEngine engine;
 
@@ -28,20 +32,15 @@ public class NashornConverter
             invocable = (Invocable)engine;
             engine.eval("var module = {}");
             engine.eval(converterJS);
-            result   = invocable.invokeFunction("convert", data);
+            result = invocable.invokeFunction("convert",
+                                              data);
 
             return result.toString();
         }
-        catch(final ScriptException ex)
+        catch(final ScriptException | NoSuchMethodException | NashornException ex)
         {
-            ex.printStackTrace();
+            throw new ConversionException(ex);
         }
-        catch(final NoSuchMethodException ex)
-        {
-            ex.printStackTrace();
-        }
-
-        return null;
     }
 }
 
